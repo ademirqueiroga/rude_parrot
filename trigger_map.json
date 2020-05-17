@@ -1,0 +1,27 @@
+[
+    {
+        "triggers": [
+            "standup",
+            "stand up"  
+        ],        
+        "speeches": [
+            {
+                "language": "pt-br",
+                "speech": "Tira o rábo da cadeira Rangel"
+            }            
+        ],
+        "processor": "DefaultSpeechProcessor"
+    },
+    {
+        "triggers": [
+            "friend"
+        ],        
+        "speeches": [
+            {
+                "language": "en-us",
+                "speech": "I am not your friend, I am your brother"
+            }            
+        ],
+        "processor": "DefaultSpeechProcessor"
+    }
+]
