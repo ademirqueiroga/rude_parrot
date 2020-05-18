@@ -3,6 +3,7 @@ import random
 import json
 import importlib
 import os
+from processors.SpeechProcessor import SpeechProcessor
 from Speech import Speech
 from gtts import gTTS
 from playsound import playsound
@@ -64,6 +65,10 @@ def main():
 
                     processor_module = importlib.import_module(f'processors.{processor}')
                     processor_class = getattr(processor_module, processor)
+
+                    if not issubclass(processor_class, SpeechProcessor):
+                        continue
+
                     trigger_speech = random.choice(entry.get(SPEECHES_KEY))
                     speech = Speech(
                         trigger_key=trigger,
@@ -85,8 +90,8 @@ def main():
             print("I could not understand the audio")
         except sr.RequestError as e:
             print("Error; {0}".format(e))
-        except Exception as e:
-            print(e)
+        # except Exception as e:
+        #     print(e)
     
 
 if __name__ == "__main__":
