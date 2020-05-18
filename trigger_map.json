@@ -23,5 +23,17 @@
             }            
         ],
         "processor": "DefaultSpeechProcessor"
+    },
+    {
+        "triggers": [
+            "hello"
+        ],        
+        "speeches": [
+            {
+                "language": "en-us",
+                "speech": "Hello bitches"
+            }            
+        ],
+        "processor": "DefaultSpeechProcessor"
     }
 ]

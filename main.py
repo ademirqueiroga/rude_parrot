@@ -2,9 +2,11 @@ import speech_recognition as sr
 import random
 import json
 import importlib
+import os
 from Speech import Speech
 from gtts import gTTS
 from playsound import playsound
+from pathlib import Path
 
 
 TRIGGERS_KEY = 'triggers'
@@ -64,14 +66,20 @@ def main():
                     processor_class = getattr(processor_module, processor)
                     trigger_speech = random.choice(entry.get(SPEECHES_KEY))
                     speech = Speech(
+                        trigger_key=trigger,
+                        trigger_speech=recognized_speech,
                         speech=trigger_speech.get(SPEECH_KEY),
-                        language=trigger_speech.get(LANG_KEY),
-                        processor=processor_class()
+                        language=trigger_speech.get(LANG_KEY),                        
                     )        
 
-            if speech:                
-                gTTS(speech.processed(), lang=speech.language).save('tts.mp3')
-                playsound('tts.mp3')
+            if speech:
+                # text to speech            
+                tts = speech.processed(processor_class())                
+                filename = f'media/{hash((speech.trigger_key, speech.speech, processor_class))}.mp3'
+                if not Path(filename).is_file():
+                    gTTS(tts, lang=speech.language).save(filename)
+
+                playsound(filename)
 
         except sr.UnknownValueError:
             print("I could not understand the audio")
@@ -82,5 +90,9 @@ def main():
     
 
 if __name__ == "__main__":
+
+    if not Path('media').is_dir():
+        os.mkdir('media')
+
     while True:
         main()

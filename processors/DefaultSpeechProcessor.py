@@ -1,5 +1,5 @@
-class DefaultSpeechProcessor:        
+class DefaultSpeechProcessor:            
 
-    def process(self, speech):                
-        return speech
+    def process(self, speech):
+        return speech.speech
     

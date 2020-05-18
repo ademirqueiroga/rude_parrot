@@ -1,10 +1,12 @@
 class Speech:
 
-    def __init__(self, speech, language, processor, *args, **kwargs):
+    def __init__(self, trigger_key, trigger_speech,
+                speech, language,*args, **kwargs):
+        self.trigger_key = trigger_key
+        self.trigger_speech = trigger_speech
         self.speech = speech
-        self.language = language                
-        self.processor = processor
+        self.language = language                        
 
 
-    def processed(self):
-        return self.processor.process(self.speech)
+    def processed(self, processor):
+        return processor.process(self)
