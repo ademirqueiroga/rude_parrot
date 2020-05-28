@@ -58,7 +58,7 @@ def main():
 
             speech = None
             for trigger in triggers:
-                if trigger in recognized_speech.lower():                    
+                if trigger in recognized_speech.lower():
                     entry = trigger_map[trigger]
                     print('Entry', entry)                                        
                     processor = entry.get(PROCESSOR_KEY)                    
